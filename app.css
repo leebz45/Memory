@@ -1,0 +1,84 @@
+body {
+    background-color: whitesmoke;
+}
+.container {
+    margin: 50px auto;
+    display:flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+    width:75%;
+}
+.card-container {
+    perspective: 1000px;
+}
+
+/* .card-container:hover .card {
+    transform: rotateY(-180deg);
+} */
+
+.card-container, .front, .back {
+    width: 100px;
+    height: 150px;
+}
+
+.card {
+    transition: 1s;    
+    transform-style: preserve-3d;
+    position: relative;
+}
+
+.card.flipped {
+    transform: rotateY(-180deg);
+}
+
+.front, .back {
+    backface-visibility: hidden;
+    position: absolute;
+	top: 0;
+	left: 0;
+    border: 1px solid black;
+    border-radius: 10%;
+}
+.front {
+    transform: rotateY(-180deg);
+}
+
+.back {
+    background-color: white;
+    z-index: 2;
+    transform: rotateY(0deg);
+}
+
+.red {
+    background-color: red;
+}
+
+.orange {
+    background-color: orange;
+}
+
+.yellow {
+    background-color: yellow;
+}
+
+.green {
+    background-color: green;
+}
+
+.blue {
+    background-color: blue;
+}
+
+.indigo {
+    background-color: indigo;
+}
+
+.violet {
+    background-color: violet;
+}
+
+.magenta {
+    background-color: magenta;
+}
