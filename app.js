@@ -29,48 +29,77 @@ function addCards() {
     for (let i = 0; i < 2; i++) {
         let container = document.createElement("div");
         container.classList.add("container");
-        document.body.appendChild(container);
+        document.getElementById("main").appendChild(container);
         for (let j = 0; j < 8; j++) {
+            // Card Container
             const cardContainer = document.createElement("div");
             cardContainer.classList.add("card-container");
 
+            // Card Wrapper
             const card = document.createElement("div");
             card.classList.add("card");
             card.id = count;
-            card.onclick = turnCard;
+            // card.onclick = turnCard;
+            card.addEventListener("click",turnCard);
+
+            // Front of card
             const front = document.createElement("div");
             front.classList.add("front");
             front.classList.add(rowColors[count]);
 
+            // Back of card
             const back = document.createElement("div");
             back.classList.add("back");
+            const ic = document.createElement("i");
+            ic.classList.add("fas", "fa-brain", "fa-4x", "fa-fw", "cardIcon");
+            back.appendChild(ic);
 
             card.appendChild(front);
             card.appendChild(back);
             cardContainer.appendChild(card);
             container.appendChild(cardContainer);
-            
+
             count++;
         }
     }
 }
 
-function turnCard(e) {
-    let flip = document.getElementById(e.target.parentElement.id)
-    if (flip.classList.contains("flipped")) {
+// function turnCard(e) {
+//     let flip = document.getElementById(e.target.parentElement.id)
+//     if (flip.classList.contains("flipped")) {
+//         return;
+//     } else {
+//         flip.classList.toggle("flipped");
+//     }
+
+//     if (!firstFlip) {
+//         firstFlip = flip;
+//         return;
+//     } else if (firstFlip.children[0].classList[1] !== flip.children[0].classList[1]) {
+//         setTimeout(function (el) {
+//             el.classList.toggle("flipped");
+//             flip.classList.toggle("flipped");
+//         }, 2 * 1000, firstFlip);
+//     }
+//     firstFlip = null;
+// }
+
+function turnCard() {
+  
+    if (this.classList.contains("flipped")) {
         return;
     } else {
-        flip.classList.toggle("flipped");
+        this.classList.toggle("flipped");
     }
 
     if (!firstFlip) {
-        firstFlip = flip;
+        firstFlip = this;
         return;
-    } else if (firstFlip.children[0].classList[1] !== flip.children[0].classList[1]) {
-        setTimeout(function (el) {
-            el.classList.toggle("flipped");
-            flip.classList.toggle("flipped");
-        }, 2 * 1000, firstFlip);
+    } else if (firstFlip.children[0].classList[1] !== this.children[0].classList[1]) {
+        setTimeout(function (first,second) {
+            first.classList.toggle("flipped");
+            second.classList.toggle("flipped");
+        }, 1 * 1000, firstFlip,this);
     }
     firstFlip = null;
 }
