@@ -1,4 +1,4 @@
-let colors = ["red", "orange", "yellow", "green", "blue", "violet", "indigo", "magenta"];
+let colors = ["red", "orange", "yellow", "green", "blue", "violet", "indigo", "lightgreen"];
 const dupColors = [...colors];
 colors = colors.concat(dupColors);
 var firstFlip = null;
@@ -39,7 +39,6 @@ function addCards() {
             const card = document.createElement("div");
             card.classList.add("card");
             card.id = count;
-            // card.onclick = turnCard;
             card.addEventListener("click",turnCard);
 
             // Front of card
@@ -63,26 +62,6 @@ function addCards() {
         }
     }
 }
-
-// function turnCard(e) {
-//     let flip = document.getElementById(e.target.parentElement.id)
-//     if (flip.classList.contains("flipped")) {
-//         return;
-//     } else {
-//         flip.classList.toggle("flipped");
-//     }
-
-//     if (!firstFlip) {
-//         firstFlip = flip;
-//         return;
-//     } else if (firstFlip.children[0].classList[1] !== flip.children[0].classList[1]) {
-//         setTimeout(function (el) {
-//             el.classList.toggle("flipped");
-//             flip.classList.toggle("flipped");
-//         }, 2 * 1000, firstFlip);
-//     }
-//     firstFlip = null;
-// }
 
 function turnCard() {
   
