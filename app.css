@@ -53,9 +53,12 @@ body {
 	top: 0;
 	left: 0;
     border-radius: 10%;
+    text-align:center;
 }
 .front {
     transform: rotateY(-180deg);
+    background-color: #D4A373;
+    color: #FAEDCD;
 }
 
 .back {
@@ -64,42 +67,9 @@ body {
     /* border: 6px solid #D4A373; */
     z-index: 2;
     transform: rotateY(0deg);
-    text-align:center;
     line-height:100%;
 }
 .cardIcon{
     line-height:150px;
     vertical-align:middle;
-}
-
-.red {
-    background-color: red;
-}
-
-.orange {
-    background-color: orange;
-}
-
-.yellow {
-    background-color: yellow;
-}
-
-.green {
-    background-color: green;
-}
-
-.blue {
-    background-color: blue;
-}
-
-.indigo {
-    background-color: indigo;
-}
-
-.violet {
-    background-color: violet;
-}
-
-.lightgreen {
-    background-color: lightgreen;
 }
