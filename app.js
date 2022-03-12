@@ -4,11 +4,13 @@ let icons = ["fa-dragon", "fa-otter", "fa-kiwi-bird", "fa-dove", "fa-crow", "fa-
     "fa-dog", "fa-hippo"];
 let numMatches = 8;
 // Slice the icons array to the number of matches we have
-icons = icons.slice(0,numMatches);
+icons = icons.slice(0, numMatches);
 // Duplicate the array and combine it with the original so it will match the number of cards
 const dupIcons = [...icons];
 icons = icons.concat(dupIcons);
+var timer = null;
 var firstFlip = null;
+var gameover = false;
 
 function shuffle(arr) {
 
@@ -84,12 +86,59 @@ function turnCard() {
         firstFlip = this;
         return;
     } else if (firstFlip.children[0].children[0].classList[1] !== this.children[0].children[0].classList[1]) {
+        // Animate flipping cards back over if not a match
         setTimeout(function (first, second) {
             first.classList.toggle("flipped");
             second.classList.toggle("flipped");
         }, 1 * 1000, firstFlip, this);
-    }
+    } else checkGamover();
+
     firstFlip = null;
 }
 
+function checkGamover() {
+    // Loop through elements of class card. As soon as we find one that's not flipped the game isn't over. 
+    let cards = document.getElementsByClassName("card");
+    for (let card of cards) {
+        if (!card.classList.contains("flipped")) {
+            return;
+        }
+    }
+    gameOver();
+}
+
+function gameOver() {
+    let cards = document.getElementsByClassName("card");
+
+    clearInterval(timer);
+
+    for (let card of cards) {
+        card.removeEventListener("click", turnCard);
+    }
+    gameover = true;
+}
+
+function start() {
+    timer = setInterval(function () {
+        let timeMin = document.getElementById("minutes");
+        let timeSec = document.getElementById("seconds");
+        let s = parseInt(timeSec.textContent);
+        let m = parseInt(timeMin.textContent);
+
+        s++;
+        if (s >= 60) {
+            s = 0;
+            m++;
+        }
+        if (m > 9) {
+            gameOver();
+        }
+
+        timeMin.textContent = m.toString().padStart(2, "0");
+        timeSec.textContent = s.toString().padStart(2, "0");
+
+    }, 1000)
+}
+
 addCards();
+start();
